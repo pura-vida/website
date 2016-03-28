@@ -1,1 +1,12 @@
-<span style="background-color:#ff00ff;color:#00ff00;">lil doggie</span>
+<span id="doggie" style="background-color:#ff00ff;color:#00ff00;">lil doggie</span>
+
+<script type="text/javascript">
+  var doggie = document.getElementById("doggie");
+  var size = 8;
+  doggie.style.fontSize = size+"px";
+  var dogTimer = setInterval(function(){
+    size += 2;
+    doggie.style.fontSize = size+"px";
+    if (size >= 48) clearInterval(dogTimer);
+  }, 100);
+</script>
