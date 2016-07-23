@@ -5,9 +5,11 @@
 		<script>
 			
 			function init() {
-				var pages = ["doggie.html", "index.html", "catmapper.html"];
-				var page = Math.floor(Math.random() * pages.length);
-				window.alert(page);
+				// all the html files in this directory/repo
+				var pages = ["home.html", "doggie.html", "index.html", "catmapper.html"];
+				var page_index = Math.floor(Math.random() * pages.length);
+				// window.alert(page);
+				window.location.href = pages[page_index];
 			}
 
 		</script>
