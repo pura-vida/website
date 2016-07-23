@@ -1,0 +1,125 @@
+<html>
+<head>
+<style type="text/css">
+body{ padding:0px; margin:0px;}
+</style>
+<script src="TRICK.js"></script>
+</head>
+<body>
+<canvas id="cowvas" style="image-rendering: pixelated;">
+
+</canvas>
+<img id="brown_cow" src="cows/brown_cow_ani.png" style="display:none;"/>
+<img id="white_cow" src="cows/white_cow_ani.png" style="display:none;"/>
+<img id="grass" src="cows/grass.png"  style="display:none;"/>
+
+<script>
+var canvas = document.getElementById("cowvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.onresize = function(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.imageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+}
+var ctx = canvas.getContext("2d");
+ctx.imageSmoothingEnabled = false;
+ctx.mozImageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
+
+var brown_cow_img = document.getElementById("brown_cow");
+var white_cow_img = document.getElementById("white_cow");
+var cow_images = [
+    brown_cow_img,
+    brown_cow_img,
+    brown_cow_img,
+    white_cow_img,
+];
+var grass_img = document.getElementById("grass");
+
+var cows = [];
+var facings = [0, 0, 0, 1];
+function makeCow(){
+    var cow = {};
+    cow.img = cow_images[Math.floor(Math.random() * cow_images.length)];
+    cow.x = Math.floor(Math.random()*(window.innerWidth - 64));
+    cow.y = Math.floor(Math.random()*(window.innerHeight - 64));
+    cow.facing = facings[Math.floor(Math.random() * facings.length)];
+    cow.ani_x = 0;
+    cow.ani_y = 0;
+    cow.ani_rows = 4;
+    cow.ani_columns = 8;
+    cow.ani_frame = 0;
+
+    cow.count = 0;
+    cow.max_count = 32;
+
+    return cow;
+}
+cows.push(makeCow());
+
+var new_cow_timer = 0;
+var new_cow_time_limit = 1000;
+function updateCows(){
+    //make a new cow??
+    new_cow_timer++;
+    if (new_cow_timer >= new_cow_time_limit){
+        new_cow_timer = 0;
+        new_cow_time_limit = new_cow_time_limit - 100;
+        if (new_cow_time_limit <= 100)
+            new_cow_time_limit = 100;
+        cows.push(makeCow());
+    }
+
+    for (var i = 0; i < cows.length; i++){
+        var cow = cows[i];
+
+        //update animation
+        cow.count++;
+        if (cow.count >= cow.max_count){
+            cow.count = 0;
+            cow.ani_frame++;
+            if (cow.ani_frame >= cow.ani_rows * cow.ani_columns)
+                cow.ani_frame = 0;
+
+            cow.ani_x = cow.ani_frame % cow.ani_columns;
+            cow.ani_y = Math.floor(cow.ani_frame / cow.ani_columns);
+        }
+    }
+}
+
+function drawCows(){
+    for (var i = 0; i < cows.length; i++){
+        var cow = cows[i];
+
+        var ani_x = cow.ani_x * 16;
+        var ani_y = cow.ani_y * 16;
+        if (cow.facing == 1){
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+        }
+        ctx.drawImage(cow.img, ani_x, ani_y, 16, 16, cow.x, cow.y, 64, 64);
+        if (cow.facing == 1){
+            ctx.scale(-1, 1);
+            ctx.translate(-canvas.width, 0);
+        }
+    }
+}
+
+function drawGrass(){
+    for (var x = 0; x < window.innerWidth; x += 64){
+        for (var y = 0; y < window.innerHeight; y += 64){
+            ctx.drawImage(grass_img, 0, 0, 16, 16, x, y, 64, 64);
+        }
+    }
+}
+
+window.setInterval(function(){
+    updateCows();
+    drawGrass();
+    drawCows();
+});
+
+</script>

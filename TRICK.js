@@ -6,7 +6,15 @@ function setWindowPage() {
 
 function getPage() {
 	// all the html files in this directory/repo
-    var pages = ["hello_map.html", "home.html", "doggie.html", "index.html", "catmapper.html"];
+    var pages = [
+        "hello_map.html",
+        "home.html",
+        "doggie.html",
+        "index.html",
+        "catmapper.html",
+        "cow.html",
+        "cow_error.html",
+    ];
                 // get page at a random index in the array of pages in the directory
     return pages[Math.floor(Math.random() * pages.length)];
     }
