@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>run, kitty!</title>
+    <style type="text/css">
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="kitty_canvas"></canvas>
+    <img src="kittyrun/kitty-run.png" id="kittyrun" style="display:none;">
+<script>
+var canvas = document.getElementById("kitty_canvas");
+var ctx = canvas.getContext("2d");
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.imageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+}
+window.onresize = resize;
+resize();
+
+var target_x = canvas.width/2;
+var target_y = canvas.height/2;
+canvas.onmousemove = function(e){
+    target_x = e.clientX;
+    target_y = e.clientY;
+}
+canvas.onmouseout = function(e){
+    target_x = canvas.width/2;
+    target_y = canvas.height/2;
+}
+
+function randomizeTargets(){
+    target_x = Math.floor(Math.random()*(window.innerWidth-32));
+    target_y = Math.floor(Math.random()*(window.innerHeight-32));
+}
+
+var cat = {
+    img: document.getElementById("kittyrun"),
+    facing: 0,
+    x: Math.floor(Math.random()*(window.innerWidth-32)),
+    y: Math.floor(Math.random()*(window.innerHeight-32)),
+    count: 0,
+    delay: 8,
+    ani_frame: 0
+};
+
+function updateCat(){
+    var speed = 8;
+    var x_success = false;
+    var y_success = false;
+    //update coordinates
+    if (cat.x < target_x){
+        cat.x += speed;
+        cat.facing = 0;
+        if (cat.x >= target_x) x_success = true;
+    }
+    if (cat.x > target_x){
+        cat.x -= speed;
+        cat.facing = 1;
+        if (cat.x <= target_x) x_success = true;
+    }
+    if (cat.y < target_y){
+        cat.y += speed;
+        if (cat.y >= target_y) y_success = true;
+    }
+    if (cat.y > target_y){
+        cat.y -= speed;
+        if (cat.y <= target_y) y_success = true;
+    }
+
+    if (x_success && y_success)
+        randomizeTargets();
+
+    //update ani
+    cat.count++;
+    if (cat.count >= cat.delay){
+        cat.count = 0;
+        cat.ani_frame++;
+        if (cat.ani_frame >= 2)
+            cat.ani_frame = 0;
+    }
+}
+function drawCat(){
+    ctx.fillStyle="#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(cat.img, cat.ani_frame*16, cat.facing*16, 16, 16, cat.x, cat.y, 32, 32);
+}
+
+window.setInterval(function(){
+    updateCat();
+    drawCat();
+}, 30);
+
+</script>
+<!--<script src="TRICK.js"></script>-->
+</body>
+</html>
