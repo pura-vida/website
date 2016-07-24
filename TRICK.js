@@ -15,7 +15,8 @@ function getPage() {
         "cow.html",
         "cow_error.html",
 		"haixi.html",
-		"kitty_map.html"
+		"kitty_map.html",
+        "potatocat.html"
     ];
                 // get page at a random index in the array of pages in the directory
     return pages[Math.floor(Math.random() * pages.length)];
