@@ -18,6 +18,7 @@ function getPage() {
 		"kitty_map.html",
         "potatocat.html",
 		"rthms.html",
+        "kittyrun.html",
     ];
                 // get page at a random index in the array of pages in the directory
     return pages[Math.floor(Math.random() * pages.length)];
