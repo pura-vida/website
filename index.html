@@ -23,7 +23,7 @@
 					<i class="material-icons" id="warning" style="color:red">warning</i>
 				</div>
 			</div>
-			<input type="image" src="index/cat_face.jpg" name="enter_butt" class="enter_button" id="enter_butt" />
+			<input type="image" src="index/cat_face2.jpg" name="enter_butt" class="enter_button" id="enter_butt" />
 		</center>
 		
 		<script>
@@ -33,10 +33,11 @@
                 function setHtml() {
                     console.log("hi");
 					if (count == 0) {
-						document.getElementById("warn_div").innerHTML = "<i class=\"material-icons\" id=\"warning\" style=\"color:red\">warning</i>";
+						document.getElementById("warn_div").innerHTML = "<i class=\"material-icons\" id=\"warning\" style=\"color:red; visibility:hidden\">warning</i>";
 						count = 1;
 					} else {
-                    	document.getElementById("warn_div").innerHTML = "<p></p>";
+                    	document.getElementById("warn_div").innerHTML = "<i class=\"material-icons\" id=\"warning\" style=\"color:red; visibility:visible\">warning</i>";
+;
 						count = 0;
 					}
                 }
