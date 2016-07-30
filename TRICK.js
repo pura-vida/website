@@ -2,7 +2,7 @@
 
 function setWindowPage() {
     window.location.href = getPage();
-    }
+}
 
 function getPage() {
 	// all the html files in this directory/repo
