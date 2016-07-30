@@ -4,44 +4,21 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
+  	<link rel="stylesheet" type="text/css" href="kitty_map/kitty_map.css">
   </head>
   <body>
     <div id="map"></div>
-    <script src = map.js>
-      /*var map;
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 37.3771, lng: 97.3698},
-          zoom: 8
-        });
-		
-		map.addListener('dblclick', function(e) {
-			placeMarker(e.latLng, map);
-		});
-      }
-
-		function placeMarker(latLng, map) {
-			var marker = new google.maps.Marker({
-				position: latLng,
-				label: "Hey!",
-				map: map
-			});
-			console.log(latLng);
-			//map.panTo(latLng);
-		}*/
-    </script>
+	<div id="cat_form">
+		<form>
+			Cat description:<br>
+			<input type"text" name="description"><br>
+			Picture:<br>
+			<input type"text" name="pics"><br>
+		</form>
+	</div>
+    <script src = kitty_map/map.js></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfDbk1arV8YXczMNa4qopAGpnB9C3ZRRU&callback=initMap"
     async defer></script>
-	<script src="TRICK.js"></script>
+	<!--<script src="TRICK.js"></script>-->
   </body>
 </html>

@@ -2,28 +2,45 @@
 <html>
 	<head>
 		<title>Pura Vida, Yall</title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script>
-			
 			function init() {
-				// set window to a random html page in the directory
-				setWindowPage();
-			}			
-
-			function setWindowPage() {
-				console.log("heyyyy");
-				window.location.href = getPage();
+				setInterval( setHtml(), 1000);
+				console.log("hey");	
+				function setHtml() {
+					console.log("hi");
+					document.getElementById("hey").innerHtml = "hey";
+				}
 			}
-
-			function getPage() {
-                // all the html files in this directory/repo
-                var pages = ["home.html", "doggie.html", "index.html", "catmapper.html"];
-				// get page at a random index in the array of pages in the directory
-                return pages[Math.floor(Math.random() * pages.length)];
-			}
-
 		</script>
 	</head>
 
 	<body onLoad=init()>
+		<center>
+			<div class="entrance" >
+				<p id="hey" style="display: inline-block">Enter the maze at your own risk... </p>
+				<div id="warn_div" style="display: inline-block">
+					<i class="material-icons" id="warning" style="color:red">warning</i>
+				</div>
+			</div>
+			<input type="image" src="index/cat_face.jpg" name="enter_butt" class="enter_button" id="enter_butt" />
+		</center>
+		
+		<script>
+				var count = 0;
+			    setInterval( function(){setHtml()}, 100);
+                console.log("hey"); 
+                function setHtml() {
+                    console.log("hi");
+					if (count == 0) {
+						document.getElementById("warn_div").innerHTML = "<i class=\"material-icons\" id=\"warning\" style=\"color:red\">warning</i>";
+						count = 1;
+					} else {
+                    	document.getElementById("warn_div").innerHTML = "<p></p>";
+						count = 0;
+					}
+                }
+
+		</script>
 	</body>
 </html>
