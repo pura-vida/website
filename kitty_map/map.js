@@ -1,5 +1,6 @@
 var map;
 function initMap() {
+	hide_div();
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 37.3771, lng: 97.3698},
     	zoom: 8
@@ -31,24 +32,24 @@ var contentString = '<div id="content">'+
     '</div>'+
     '</div>';
 
-var infowindow = new google.maps.InfoWindow({
+/*var infowindow = new google.maps.InfoWindow({
 	content: contentString
-});
+});*/
 
 // ref https://www.formget.com/how-to-create-pop-up-contact-form-using-javascript/
 function show_div() {
-	document.getElementById("cat_form").style.display = "block";
+	document.getElementById("cat_form").innerHTML = "<form> Cat description:<br> <input type\"text\" name=\"description\"><br> Picture:<br> <input type\"text\" name=\"pics\"><br> </form>";
 }
+
 
 //Function to Hide Popup
 function hide_div(){
-	document.getElementById("cat_form").style.display = "none";
+	console.log("hiding");
+	document.getElementById("cat_form").style.display = "hidden";
 }
 
-hide_div();
-
 function placeMarker(latLng, map) {
-	showDiv();
+	show_div();
     /*var marker = new google.maps.Marker({
         position: latLng,
         label: "Hey!",

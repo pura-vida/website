@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+			function init() {
+				setPage();	
+			}
+	
+			function setPage() {
+    			// all the html files in this directory/repo
+    			var pages = [
+        			"hello_map.html",
+        			"home.html",
+        			"doggie.html",
+        			"catmapper.html",
+        			"cow.html",
+        			"cow_error.html",
+        			"haixi.html",
+        			"kitty_map.html",
+        			"potatocat.html",
+        			"rthms.html",
+        			"kittyrun.html",
+    			];
+                // get page at a random index in the array of pages in the directory
+				var html1 = "<iframe src= ";
+				var html2 = pages[Math.floor(Math.random() * pages.length)];
+				var html3 = " style=\"height: 600px; width: 600px;\"></iframe>";
+				var html = html1.concat(html2.concat(html3)); // put the strings together
+				console.log(html);
+    			document.getElementById("frame-holder").innerHTML = html
+    		}
+
+
+		</script>
+
+</head>
+<body onLoad=init()>
+	<!-- <object data="index.html" style="height: 100%"></object> !-->
+
+	<center>
+		<div id="frame-holder">
+			<iframe src="index.html" style="height: 600px; width: 600px;"></iframe>
+		</div>
+		<br>
+		<div>
+			<input type="image" style="display: inline-block" src="frame/leftarrow.png" onClick=setPage() class="enter_button" id="enter_butt" />
+			<input type="image" style="display: inline-block"  src="frame/rightarrow.png" onClick=setPage() class="enter_button" id="enter_butt" />
+
+		</div>
+	</center>
+</body>
+</html>
