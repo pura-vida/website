@@ -2,49 +2,103 @@
 <html>
 <head>
 <script>
-			function init() {
-				setPage();	
-			}
-	
-			function setPage() {
-    			// all the html files in this directory/repo
-    			var pages = [
-        			"hello_map.html",
-        			"home.html",
-        			"doggie.html",
-        			"catmapper.html",
-        			"cow.html",
-        			"cow_error.html",
-        			"haixi.html",
-        			"kitty_map.html",
-        			"potatocat.html",
-        			"rthms.html",
-        			"kittyrun.html",
-    			];
-                // get page at a random index in the array of pages in the directory
-				var html1 = "<iframe src= ";
-				var html2 = pages[Math.floor(Math.random() * pages.length)];
-				var html3 = " style=\"height: 600px; width: 600px;\"></iframe>";
-				var html = html1.concat(html2.concat(html3)); // put the strings together
-				console.log(html);
-    			document.getElementById("frame-holder").innerHTML = html
-    		}
+    //set the global scope vars
+    var page_index = 0;
+    // all the html files in this directory/repo
+    var pages = [
+        "hello_map.html",
+        "home.html",
+        "doggie.html",
+        "catmapper.html",
+        "cow.html",
+        "cow_error.html",
+        "haixi.html",
+        "kitty_map.html",
+        "potatocat.html",
+        "rthms.html",
+        "kittyrun.html",
+        "index.html",
+    ];
+
+	function init() {
+		setRandomPage();
+	}
+
+	function setRandomPage() {
+        //page index is a global var, pages too
+        // get page at a random index in the array of pages in the directory
+        page_index = Math.floor(Math.random() * pages.length);
+        setPage(page_index);
+	}
+
+    function setPage(page_index){
+        //set the iframe
+		var html1 = "<iframe src= ";
+		var html2 = pages[page_index];
+		var html3 = " style=\"height: 600px; width: 600px;\"></iframe>";
+		var html = html1.concat(html2.concat(html3)); // put the strings together
+		console.log(html);
+		document.getElementById("frame-holder").innerHTML = html
+
+        //set the title!!
+        document.getElementById("frame-title").innerHTML = html2;
+    }
+
+    function setNextPage(){
+        refreshArrowButts();
+
+        //page_index is a global var
+        page_index++;
+        //dead end!
+        if (page_index >= pages.length-1){
+            page_index = pages.length-1;
+            document.getElementById("right_butt").src="frame/rightarrow_grey.png";
+            document.getElementById("right_butt").onclick = function(){};
+        }
+
+        setPage(page_index);
+    }
+
+    function setPreviousPage(){
+        refreshArrowButts();
+
+        //page_index is a global var
+        page_index--;
+        //dead end!
+        if (page_index <= 0){
+            page_index = 0;
+            document.getElementById("left_butt").src="frame/leftarrow_grey.png";
+            document.getElementById("left_butt").onclick = function(){};
+        }
 
 
-		</script>
+        setPage(page_index);
+    }
+
+    function refreshArrowButts(){
+        document.getElementById("left_butt").src="frame/leftarrow.png";
+        document.getElementById("left_butt").onclick = setPreviousPage;
+
+        document.getElementById("right_butt").src="frame/rightarrow.png";
+        document.getElementById("right_butt").onclick = setNextPage;
+    }
+</script>
 
 </head>
 <body onLoad=init()>
 	<!-- <object data="index.html" style="height: 100%"></object> !-->
 
 	<center>
+        <h1 id="frame-title">current room</h1>
 		<div id="frame-holder">
 			<iframe src="index.html" style="height: 600px; width: 600px;"></iframe>
 		</div>
 		<br>
 		<div>
-			<input type="image" style="display: inline-block" src="frame/leftarrow.png" onClick=setPage() class="enter_button" id="enter_butt" />
-			<input type="image" style="display: inline-block"  src="frame/rightarrow.png" onClick=setPage() class="enter_button" id="enter_butt" />
+			<input type="image" style="display: inline-block" src="frame/leftarrow.png"
+                onClick=setPreviousPage() class="enter_button" id="left_butt" />
+			<input type="image" style="display: inline-block"  src="frame/rightarrow.png"
+                onClick=setNextPage() class="enter_button" id="right_butt" />
 
 		</div>
 	</center>
