@@ -21,12 +21,19 @@ function getPage() {
         "kittyrun.html",
     ];
                 // get page at a random index in the array of pages in the directory
+    log("you have been tricked!!");
     return pages[Math.floor(Math.random() * pages.length)];
     }
 
 function trick() {
 	console.log('this is kinda dumb');
-	window.setTimeout(setWindowPage, Math.floor(Math.random() * 100000));
+    log("...");
+
+    //timeout_id is a global var set in frame.html
+    if (timeout_id !== null){
+        window.clearTimeout(timeout_id);
+    }
+	timeout_id = window.setTimeout(setWindowPage, Math.floor(Math.random() * 100000));
 }
 
 window.addEventListener('load', trick);
