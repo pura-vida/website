@@ -1,6 +1,6 @@
-var map_button;
-var map_dialog;
-var map_dimmer;
+var map_button = undefined;
+var map_dialog = undefined;
+var map_dimmer = undefined;
 
 function createMapButton(){
 	deleteMapDoms();
@@ -31,6 +31,8 @@ function createMapDialog(){
 function createMapDimmer(){
 	map_dimmer = document.createElement("div");
 	map_dimmer.className = "map_dimmer";
+	map_dimmer.onclick = createMapButton;
+	
 	document.body.appendChild(map_dimmer);
 }
 
@@ -52,6 +54,12 @@ function populateMap(){
 	text.style.fontSize = "200%";
 	text.style.color = "#0044ff";
 	map_dialog.appendChild(text);
+	
+	var map_x = document.createElement("span");
+	map_x.innerHTML = "x";
+	map_x.className = "map_x";
+	map_x.onclick = createMapButton;
+	map_dialog.appendChild(map_x);
 	
 	map_dialog.appendChild(document.createElement("br"));
 	map_dialog.appendChild(document.createElement("br"));
