@@ -6,7 +6,7 @@ function createMapButton(){
 	deleteMapDoms();
 	
 	map_button = document.createElement("img");
-	map_button.src = '/map/map.png';
+	map_button.src = 'map/map.png';
 	map_button.className = "map_button";
 	
 	//set the onclick event

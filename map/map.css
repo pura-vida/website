@@ -29,7 +29,7 @@
 	margin: auto;
 	width: 512px;
 	height: 512px;
-	background-image: url('/map/nakedmap.png');
+	background-image: url('map/nakedmap.png');
 	background-size: 100%;
 	z-index: 999;
 	text-align: center;
