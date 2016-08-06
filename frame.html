@@ -122,12 +122,12 @@ iframe{
 		<div id="frame-holder">
 			<iframe src="index.html" style="height: 640px; width: 800px;"></iframe>
 		</div>
-		<div>
-			<input type="image" style="display: inline-block" src="frame/leftarrow.png"
-                onClick=setPreviousPage() class="enter_button" id="left_butt" />
-			<input type="image" style="display: inline-block"  src="frame/rightarrow.png"
-                onClick=setNextPage() class="enter_button" id="right_butt" />
-		</div>
+    
+        <input type="image" style="position:absolute; left:-164px; right:0; margin:0 auto; bottom:16px;" src="frame/leftarrow.png"
+            onClick=setPreviousPage() class="enter_button" id="left_butt" />
+        <input type="image" style="position:absolute; left:0;right:-164px; margin: 0 auto; bottom: 16px;"  src="frame/rightarrow.png"
+            onClick=setNextPage() class="enter_button" id="right_butt" />
+    
         <div id="log" style="padding-top: 8px;width: 600px; height: 100px; max-height:100px; border: 2px inset; text-align: left; padding-left: 16px; font-family: monospace; display: none;"></div>
 	</center>
 	
