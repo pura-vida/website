@@ -62,6 +62,8 @@ cows.push(makeCow());
 
 var new_cow_timer = 0;
 var new_cow_time_limit = 1000;
+var num_cows = 0;
+var max_cows = 100;
 function updateCows(){
     //make a new cow??
     new_cow_timer++;
@@ -70,7 +72,11 @@ function updateCows(){
         new_cow_time_limit = new_cow_time_limit - 100;
         if (new_cow_time_limit <= 100)
             new_cow_time_limit = 100;
-        cows.push(makeCow());
+            
+        if (num_cows < max_cows){
+            cows.push(makeCow());
+            num_cows++;
+        }
     }
 
     for (var i = 0; i < cows.length; i++){
