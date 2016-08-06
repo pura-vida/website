@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var snail_count;
+            
+            var snail_positions = [
+                "snail/snail1.png",
+                "snail/snail2.png",
+                "snail/snail3.png",
+                "snail/snail2.png"
+            ];
+           
+            function init() {
+                snail_count = 0;
+                setInterval(function() { snailMove();}, 1000);   
+            }
+            
+            function snailMove() {
+                if (snail_count == 4) {
+                    snail_count = 0;
+                }  
+               
+                var html_string1 = "<img src=\"";
+                var html_string2 = snail_positions[snail_count];
+                var html_string3 = "\"></img>"; 
+                var div_string = html_string1.concat(html_string2.concat(html_string3));
+                document.getElementById("snail_pail").innerHTML = div_string;
+                snail_count += 1;
+            }
+            
+        </script>
+    </head>
+    <body onLoad=init()>
+            <div id="snail_pail" style="position: absolute; top:0; width: 100px; height: 100px; bottom:0; left: 0; margin: auto;">
+                <img src="snail/snail1.png"></img>
+            </div>
+    </body>
+</html>
+  
