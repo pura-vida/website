@@ -2,6 +2,15 @@
 <html>
 <head>
 <title>internet maze</title>
+<style type="text/css">
+body{
+    background: linear-gradient(#eeffff, #ffeeee);
+    
+}
+iframe{
+    background: #ffffff;
+}
+</style>
 <script>
     var timeout_id = null;
 
@@ -9,15 +18,15 @@
     var page_index = 0;
     // all the html files in this directory/repo
     var pages = [
+        "home.html",
         "hello_map.html",
         "fighter.html",
-        "home.html",
         "doggie.html",
+        "kitty_map.html",
         "catmapper.html",
         "cow.html",
         "cow_error.html",
         "haixi.html",
-        "kitty_map.html",
         "potatocat.html",
         "rthms.html",
         "kittyrun.html",
@@ -39,7 +48,7 @@
 
     function setPage(page_index){
         //set the iframe
-		var html1 = "<iframe src= ";
+		var html1 = "<iframe id='frame' src= ";
 		var html2 = pages[page_index];
 		var html3 = " style=\"height: 640px; width: 800px;\"></iframe>";
 		var html = html1.concat(html2.concat(html3)); // put the strings together
@@ -48,6 +57,11 @@
 
         //set the title!!
         document.getElementById("frame-title").innerHTML = html2;
+    }
+    
+    function setPageByUrl(url){
+        var index = pages.indexOf(url);
+        setPage(index);
     }
 
     function setNextPage(){
@@ -60,6 +74,7 @@
             page_index = pages.length-1;
             document.getElementById("right_butt").src="frame/rightarrow_grey.png";
             document.getElementById("right_butt").onclick = function(){};
+            document.getElementById("right_butt").style.cursor = "default";
         }
 
         log("you move east");
@@ -76,6 +91,7 @@
             page_index = 0;
             document.getElementById("left_butt").src="frame/leftarrow_grey.png";
             document.getElementById("left_butt").onclick = function(){};
+            document.getElementById("left_butt").style.cursor = "default";
         }
 
         log("you move west");

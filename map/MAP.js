@@ -15,9 +15,7 @@ function createMapButton(){
 	document.body.appendChild(map_button);
 }
 
-function createMapDialog(){
-	deleteMapDoms();
-	
+function createMapDialog(){	
 	createMapDimmer();
 	
 	map_dialog = document.createElement("div");
@@ -48,6 +46,21 @@ function deleteMapDoms(){
 	map_dimmer = undefined;
 }
 
+function travelToSelected(){
+    var e = document.getElementById("map_place_selector");
+    var place = e.options[e.selectedIndex].text;
+    console.log("traveling to... " + place);
+    setPageByUrl(place);
+    
+    createMapButton();
+}
+
+function travelRandomly(){
+    setRandomPage();
+    
+    createMapButton();
+}
+
 function populateMap(){
 	var text = document.createElement("span");
 	text.innerHTML = "map";
@@ -70,8 +83,9 @@ function populateMap(){
 	map_dialog.appendChild(document.createElement("br"));
 	//create places dropdown
 	var places_dom = document.createElement("select");
+    places_dom.id = "map_place_selector";
 	//TODO (from cookies)
-	var places = ["", "hello.html", "cow.html", "snail.html"];
+	var places = ["", "fighter.html", "cow.html", "snail.html"];
 	for (var i = 0; i < places.length; i++){
 		var place_dom = document.createElement("option");
 		place_dom.innerHTML = places[i];
@@ -82,6 +96,7 @@ function populateMap(){
 	
 	var places_button = document.createElement("button");
 	places_button.innerHTML = "travel here";
+    places_button.onclick = travelToSelected;
 	map_dialog.appendChild(places_button);
 	
 	map_dialog.appendChild(document.createElement("br"));
@@ -95,6 +110,7 @@ function populateMap(){
 	map_dialog.appendChild(document.createElement("br"));
 	var new_button = document.createElement("button");
 	new_button.innerHTML = "teleport";
+    new_button.onclick = travelRandomly;
 	map_dialog.appendChild(new_button);
 }
 
