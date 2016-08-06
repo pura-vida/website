@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var cat_count;
+            
+            var winks = [
+                "winkcat/winkcat1.png",
+                "winkcat/winkcat1.png",
+                "winkcat/winkcat1.png",
+                "winkcat/winkcat1.png",
+              //  "winkcat/winkcat2.png",
+              //  "winkcat/winkcat3.png",
+                "winkcat/winkcat4alternate2.png",
+                "winkcat/winkcat4alternate2.png",
+                "winkcat/winkcat4alternate2.png",
+             //   "winkcat/winkcat3.png",
+             //   "winkcat/winkcat2.png",
+                "winkcat/winkcat1.png",  
+            ];
+           
+            function init() {
+                cat_count = 0;
+                setInterval(function() { kittywink();}, 100);   
+            }
+            
+            function kittywink() {
+                if (cat_count == 8) {
+                    cat_count = 0;
+                }  
+               
+                var html_string1 = "<img src=\"";
+                var html_string2 = winks[cat_count];
+                var html_string3 = "\"></img>"; 
+                var div_string = html_string1.concat(html_string2.concat(html_string3));
+                document.getElementById("kitty_crib").innerHTML = div_string;
+                cat_count += 1;
+            }
+            
+        </script>
+    </head>
+    <body onLoad=init()>
+            <div id="kitty_crib" style="position: absolute; top:0; width: 100px; height: 100px; bottom:0; left: 0; margin: auto;">
+            </div>
+    </body>
+</html>
+  
