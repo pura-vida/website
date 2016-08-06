@@ -1,0 +1,56 @@
+<html>
+<style type="text/css">
+	a{ 
+        color: #ffffff; 
+    }
+	.fighter{ 
+        margin: 5px;
+        padding: 3px;
+        border: 1px solid white;
+    }
+    .fighter-div{
+        display: inline-block;
+    }
+    .fighter-div:hover{
+        filter:hue-rotate(90deg);
+        -webkit-filter:hue-rotate(90deg);
+        color: #ff0000;
+        background: #00ff00;
+    }
+</style>
+<body style="background: #000000; color: #ffffff;">
+<center><h2>choose your fighter</h2>
+	<a href="amy.html"><div class="fighter-div">
+        <img class="fighter" id="amy"><br>
+        amy
+    </div></a>
+    
+    <a href="snail.html"><div class="fighter-div">
+        <img class="fighter" id="snail"><br>
+        snail
+    </div></a>
+    <a href="jake.html"><div class="fighter-div">
+        <img class="fighter" id="jake"><br>
+        jake
+    </div></a>
+	<a href="cow.html"><div class="fighter-div">
+        <img class="fighter" id="cow"><br>
+        cow
+    </div></a>
+</center>
+<script>
+	var fighters = ["amy", "jake", "snail", "cow"];
+	function updateAnimation(){
+		for (var i = 0; i < fighters.length; i++){
+			var fighter = fighters[i];
+			var dom = document.getElementById(fighter);
+			if (dom.src.indexOf("fighter/"+fighter+"1.png") >= 0)
+				dom.src = "fighter/"+fighter+"2.png";
+			else dom.src = "fighter/"+fighter+"1.png";
+		}
+	}
+	updateAnimation();
+	window.setInterval(updateAnimation, 300);
+</script>
+</body>
+</html>
