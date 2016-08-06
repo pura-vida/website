@@ -1,0 +1,1 @@
+use frame.html format as a mini map room inside of the labyrinth
