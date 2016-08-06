@@ -27,7 +27,6 @@ function getPage() {
 
 function trick() {
 	console.log('this is kinda dumb');
-    log("...");
 
     //timeout_id is a global var set in frame.html
     if (timeout_id !== null){

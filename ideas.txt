@@ -1,1 +1,2 @@
-use frame.html format as a mini map room inside of the labyrinth
+need to make fighter links update frame.html location??
+make map actually work

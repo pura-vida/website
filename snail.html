@@ -2,6 +2,7 @@
 <html>
     <head>
         <script>
+			var snail_x = 0;
             var snail_count;
             
             var snail_positions = [
@@ -13,7 +14,8 @@
            
             function init() {
                 snail_count = 0;
-                setInterval(function() { snailMove();}, 1000);   
+                setInterval(function() { snailMove();}, 500);
+				setInterval(function() { snailCrawl(); }, 100);
             }
             
             function snailMove() {
@@ -28,6 +30,12 @@
                 document.getElementById("snail_pail").innerHTML = div_string;
                 snail_count += 1;
             }
+			function snailCrawl(){
+				snail_x += 2;
+				if (snail_x > window.innerWidth + 32)
+					snail_x = -64;
+				document.getElementById("snail_pail").style.left = snail_x + "px";
+			}
             
         </script>
     </head>
