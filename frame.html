@@ -35,8 +35,21 @@ iframe{
 
 	function init() {
 		setRandomPage();
+        window.setInterval(tryUpdateIFrame, 1000);
         log("trying to make TRICK.js say 'you've been tricked!' here when teleported");
 	}
+    
+    function tryUpdateIFrame(){
+        var href = document.getElementById("frame").contentWindow.location.href;
+        var page_name = href.substr(href.lastIndexOf("/")+1, href.length);
+        if (page_name == pages[page_index]) return;
+        
+        //if the page name exists in the upper level pages array...
+        //update the arrows and title
+        if (pages.indexOf(page_name) >= 0)
+            setPage(pages.indexOf(page_name), false);
+        refreshArrowButts();
+    }
 
 	function setRandomPage() {
         //page index is a global var, pages too
@@ -46,17 +59,18 @@ iframe{
         setPage(page_index);
 	}
 
-    function setPage(page_index){
+    function setPage(index, update_frame){
+        if (update_frame === undefined) update_frame = true; //default to tru
+    
         //set the iframe
-		var html1 = "<iframe id='frame' src= ";
-		var html2 = pages[page_index];
-		var html3 = " style=\"height: 640px; width: 800px;\"></iframe>";
-		var html = html1.concat(html2.concat(html3)); // put the strings together
-		//console.log(html);
-		document.getElementById("frame-holder").innerHTML = html
+        var frame = document.getElementById("frame");
+        page_index = index;
+        
+        if (update_frame)
+            frame.src = pages[index];
 
         //set the title!!
-        document.getElementById("frame-title").innerHTML = html2;
+        document.getElementById("frame-title").innerHTML = pages[page_index];
     }
     
     function setPageByUrl(url){
@@ -120,7 +134,7 @@ iframe{
 	<center>
         <h1 id="frame-title">current room</h1>
 		<div id="frame-holder">
-			<iframe src="index.html" style="height: 640px; width: 800px;"></iframe>
+			<iframe id="frame" src="index.html" style="height: 640px; width: 800px;"></iframe>
 		</div>
     
         <input type="image" style="position:absolute; left:-164px; right:0; margin:0 auto; bottom:16px;" src="frame/leftarrow.png"
