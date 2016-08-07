@@ -48,7 +48,6 @@ iframe{
         //update the arrows and title
         if (pages.indexOf(page_name) >= 0)
             setPage(pages.indexOf(page_name), false);
-        refreshArrowButts();
     }
 
 	function setRandomPage() {
@@ -71,6 +70,8 @@ iframe{
 
         //set the title!!
         document.getElementById("frame-title").innerHTML = pages[page_index];
+        //set the arrows!
+        refreshArrowButts();
     }
     
     function setPageByUrl(url){
@@ -79,16 +80,11 @@ iframe{
     }
 
     function setNextPage(){
-        refreshArrowButts();
-
         //page_index is a global var
         page_index++;
         //dead end!
         if (page_index >= pages.length-1){
             page_index = pages.length-1;
-            document.getElementById("right_butt").src="frame/rightarrow_grey.png";
-            document.getElementById("right_butt").onclick = function(){};
-            document.getElementById("right_butt").style.cursor = "default";
         }
 
         log("you move east");
@@ -96,16 +92,11 @@ iframe{
     }
 
     function setPreviousPage(){
-        refreshArrowButts();
-
         //page_index is a global var
         page_index--;
         //dead end!
         if (page_index <= 0){
             page_index = 0;
-            document.getElementById("left_butt").src="frame/leftarrow_grey.png";
-            document.getElementById("left_butt").onclick = function(){};
-            document.getElementById("left_butt").style.cursor = "default";
         }
 
         log("you move west");
@@ -115,9 +106,23 @@ iframe{
     function refreshArrowButts(){
         document.getElementById("left_butt").src="frame/leftarrow.png";
         document.getElementById("left_butt").onclick = setPreviousPage;
+        //dead end
+        if (page_index <= 0){
+            page_index = 0;
+            document.getElementById("left_butt").src="frame/leftarrow_grey.png";
+            document.getElementById("left_butt").onclick = function(){};
+            document.getElementById("left_butt").style.cursor = "default";
+        }
 
         document.getElementById("right_butt").src="frame/rightarrow.png";
         document.getElementById("right_butt").onclick = setNextPage;
+        //dead end!
+        if (page_index >= pages.length-1){
+            page_index = pages.length-1;
+            document.getElementById("right_butt").src="frame/rightarrow_grey.png";
+            document.getElementById("right_butt").onclick = function(){};
+            document.getElementById("right_butt").style.cursor = "default";
+        }
     }
 
     function log(msg){

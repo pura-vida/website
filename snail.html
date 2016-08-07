@@ -8,7 +8,9 @@
 		</style>
         <script>
 			var snail_x = 0;
+            var snail_speed = 2;
             var snail_count;
+            var strike = false;
             
             var snail_positions = [
                 "snail/snail1.png",
@@ -23,20 +25,33 @@
 				setInterval(function() { snailCrawl(); }, 100);
             }
             
+            function faster(){
+                if (strike) return;
+                snail_speed += 2;
+                if (snail_speed > 64){
+                    snail_speed = 1;
+                    strike = true;
+                    document.getElementById("msg").innerHTML = "the snail is going on strike.<br>you worked him too hard :(";
+                }
+            }
+            
+            function slower(){
+                snail_speed /= 2;
+                if (snail_speed < 1) snail_speed = 1;
+            }
+            
             function snailMove() {
                 if (snail_count == 4) {
                     snail_count = 0;
                 }  
                
-                var html_string1 = "<img src=\"";
-                var html_string2 = snail_positions[snail_count];
-                var html_string3 = "\"></img>"; 
-                var div_string = html_string1.concat(html_string2.concat(html_string3));
-                document.getElementById("snail_pail").innerHTML = div_string;
+                var img = document.getElementById("snail_img");
+                img.src = snail_positions[snail_count];
+                
                 snail_count += 1;
             }
 			function snailCrawl(){
-				snail_x += 2;
+				snail_x += snail_speed;
 				if (snail_x > window.innerWidth + 32)
 					snail_x = -64;
 				document.getElementById("snail_pail").style.left = snail_x + "px";
@@ -46,8 +61,11 @@
     </head>
     <body onLoad=init()>
             <div id="snail_pail" style="position: absolute; top:0; width: 100px; height: 100px; bottom:0; left: 0; margin: auto;">
-                <img src="snail/snail1.png"></img>
+                <img id="snail_img" src="snail/snail1.png"></img><br>
+                <div id="msg"></div>
             </div>
+            <button id="faster" onclick="faster();">faster!</button> 
+            <button id="slower" onclick="slower();">slow down...</button>
     </body>
 </html>
   
