@@ -2,6 +2,9 @@ var map_button = undefined;
 var map_dialog = undefined;
 var map_dimmer = undefined;
 
+//TODO (from cookies)
+var places = ["", "fighter.html", "cow.html", "snail.html", "dogclick.html",];
+
 function createMapButton(){
 	deleteMapDoms();
 	
@@ -84,8 +87,6 @@ function populateMap(){
 	//create places dropdown
 	var places_dom = document.createElement("select");
     places_dom.id = "map_place_selector";
-	//TODO (from cookies)
-	var places = ["", "fighter.html", "cow.html", "snail.html"];
 	for (var i = 0; i < places.length; i++){
 		var place_dom = document.createElement("option");
 		place_dom.innerHTML = places[i];

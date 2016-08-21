@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>dog click</title>
+<style type="text/css">
+	#dogclickdiv{
+		width: 96px;
+		height: 96px;
+		border-radius: 15px;
+		cursor: pointer;
+		position: absolute;
+		left: 0px;
+		top: 48px;
+		overflow:hidden;
+	}
+	#dogclickdiv > img{
+		/*clip: rect(16px, 96px, 96px, 16px; */
+		margin: -16px;
+	}
+	#msg_canvas{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+</style>
+</head>
+<body style="margin:0;padding:0;">
+<canvas id="msg_canvas"></canvas>
+<div id="loading">
+	<img src="dogclick/logo.png" id="logo">
+	loading...
+</div>
+<span style="font-size: 200%;">instructions: click the dog</span>
+<div id="dogclickdiv" onclick="dogclick();">
+	<img src="dogclick/dog1.png" id="dog1" style="display:none;" onload="load()" onclick="dogclick();">
+	<img src="dogclick/dog2.png" id="dog2" style="display:none;" onload="load()" onclick="dogclick();">
+	<img src="dogclick/dog3.png" id="dog3" style="display:none;" onload="load()" onclick="dogclick();">
+	<img src="dogclick/dog4.png" id="dog4" style="display:none;" onload="load()" onclick="dogclick();">
+	<img src="dogclick/dog5.png" id="dog5" style="display:none;" onload="load()" onclick="dogclick();">
+	<img src="dogclick/dog6.png" id="dog6" style="display:none;" onload="load()" onclick="dogclick();">
+</div>
+<script>
+var div = document.getElementById("dogclickdiv");
+var canvas = document.getElementById("msg_canvas");
+var ctx = canvas.getContext("2d");
+function resize(){
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+}
+resize();
+window.onresize = resize;
+var x = 0;
+var y = 48;
+var exp = 0;
+var win = false;
+
+var num_loaded = 0;
+var num_needed = 6;
+function load(){
+	num_loaded++;
+	if (num_loaded >= num_needed){
+		main();
+	}
+}
+
+var colors = [
+	"#F36B72",
+	"#e7caea",
+	"#9be1e5",
+	"#85a647",
+	"#e0b079",
+	"#b57070",
+	"#b7f9f0",
+	"#79f0ab",
+	"#b68083",
+	"#0091ff",
+	"#ff6e99",
+	"#ed5dff",
+	"#ffffff",
+];
+var color_index = 0;
+var next_color = 3;
+var color = colors[color_index];
+function main(){
+	div.style.background = color;
+	document.getElementById("loading").style.display = "none";
+	window.setInterval(animate, 120);
+}
+
+var frame = 1;
+function animate(){
+	document.getElementById("dog"+frame).style.display = "none";
+	
+	frame += 1;
+	if (frame > 6) frame = 1;
+	
+	document.getElementById("dog"+frame).style.display = "inline";
+	
+	//fade text
+	if (frame % 2 == 0){
+		ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	//winning dance
+	if (frame % 3 == 0 && win){
+		congrat_dogclick();
+	}
+	
+	//clear exp
+	ctx.fillStyle="#ffffff";
+	ctx.fillRect(window.innerWidth/2-32, 0, window.innerWidth/2+32, 64);
+	//draw exp
+	ctx.font = "30px Verdana";
+	// Fill with gradient
+	ctx.fillStyle=color;
+	ctx.fillText("exp: "+exp + " five",window.innerWidth/2,40);
+	if (win)
+		ctx.fillText("congrat you won!!", window.innerWidth/2, 80);
+}
+
+
+function dogclick(){
+	if (fade_id !== undefined || win) return;
+	
+	fade_id = window.setInterval(fade, 50);
+	exp+=1;
+	if (exp >= next_color){
+		color_index++;
+		if (color_index >= colors.length){
+			color_index = 0;
+			win = true;
+		}
+		color = colors[color_index];
+		next_color += 3;
+	}
+	
+	ctx.fillStyle = color;
+	ctx.font = "24px Georgia";
+	ctx.fillText("you gained", x+16, y+48);
+	ctx.fillText("+5 exp", x+16, y+64);
+}
+
+function congrat_dogclick(){
+	ctx.fillStyle = color;
+	ctx.font = "24px Georgia";
+	ctx.fillText("you are", x+16, y+48);
+	ctx.fillText("winner!", x+16, y+64);
+	
+	reviveDog();
+	color_index += 1;
+	if (color_index >= colors.length) color_index = 0;
+	color = colors[color_index];
+}
+
+var fade_id = undefined;
+var opacity = 100;
+function fade(){
+	opacity-=80;
+	div.style.opacity=""+(opacity/100);
+	if (opacity <= 0){
+		opacity = 100;
+		window.clearInterval(fade_id);
+		fade_id = undefined;
+		reviveDog();
+	}
+}
+
+function reviveDog(){
+	x = Math.floor(Math.random()*(window.innerWidth - 128));
+	y = Math.floor(Math.random()*(window.innerHeight - 128));
+
+	div.style.opacity="";
+	div.style.left = x+"px";
+	div.style.top = y+"px";
+	div.style.background = color;
+}
+</script>
+</body>
+</html>

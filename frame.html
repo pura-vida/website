@@ -30,24 +30,39 @@ iframe{
         "rthms.html",
         "kittyrun.html",
         "snail.html",
+		"dogclick.html",
     ];
+	
+	//http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
+	function getURLParameter(name) {
+	  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+	}
 
 	function init() {
-		setRandomPage();
+		var seed = getURLParameter("seed");
+		if (seed != null){
+			updateMazeByName(seed+".html", true);
+		}else{
+			setRandomPage();
+		}
+		
         window.setInterval(tryUpdateIFrame, 1000);
         log("trying to make TRICK.js say 'you've been tricked!' here when teleported");
 	}
     
     function tryUpdateIFrame(){
         var href = document.getElementById("frame").contentWindow.location.href;
-        var page_name = href.substr(href.lastIndexOf("/")+1, href.length);
+		var page_name = href.substr(href.lastIndexOf("/")+1, href.length);
         if (page_name == pages[page_index]) return;
-        
+        updateMazeByName(page_name, false);
+    }
+	
+	function updateMazeByName(page_name, update_frame){
         //if the page name exists in the upper level pages array...
         //update the arrows and title
         if (pages.indexOf(page_name) >= 0)
-            setPage(pages.indexOf(page_name), false);
-    }
+            setPage(pages.indexOf(page_name), update_frame);
+	}
 
 	function setRandomPage() {
         //page index is a global var, pages too
