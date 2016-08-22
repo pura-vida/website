@@ -30,13 +30,13 @@
 	loading...
 </div>
 <span style="font-size: 200%;">instructions: click the dog</span>
-<div id="dogclickdiv" onclick="dogclick();">
-	<img src="dogclick/dog1.png" id="dog1" style="display:none;" onload="load()" onclick="dogclick();">
-	<img src="dogclick/dog2.png" id="dog2" style="display:none;" onload="load()" onclick="dogclick();">
-	<img src="dogclick/dog3.png" id="dog3" style="display:none;" onload="load()" onclick="dogclick();">
-	<img src="dogclick/dog4.png" id="dog4" style="display:none;" onload="load()" onclick="dogclick();">
-	<img src="dogclick/dog5.png" id="dog5" style="display:none;" onload="load()" onclick="dogclick();">
-	<img src="dogclick/dog6.png" id="dog6" style="display:none;" onload="load()" onclick="dogclick();">
+<div id="dogclickdiv" onmousedown="dogclick();">
+	<img src="dogclick/dog1.png" id="dog1" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog2.png" id="dog2" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog3.png" id="dog3" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog4.png" id="dog4" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog5.png" id="dog5" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog6.png" id="dog6" style="display:none;" onload="load()" onmousedown="dogclick();">
 </div>
 <script>
 var div = document.getElementById("dogclickdiv");
@@ -94,7 +94,8 @@ function animate(){
 	if (frame > 6) frame = 1;
 	
 	document.getElementById("dog"+frame).style.display = "inline";
-	
+	document.getElementById("dog"+frame).ondragstart = function() { return false; };
+    
 	//fade text
 	if (frame % 2 == 0){
 		ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
