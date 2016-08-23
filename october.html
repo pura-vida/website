@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>will it be october?</title>
+    <script>
+        var bubble1 = new Image();
+        var bubble2 = new Image();
+        var bubble3 = new Image();
+        var bigbubble = new Image();
+        var ole_scarecrow = new Image();
+        var scarecrow_position;
+        var bubb_count = 1;
+
+        function init() {
+            bubble1.src = "scarecrow/bubble.png";
+            bubble2.src = "scarecrow/bubble.png";
+            bubble3.src = "scarecrow/bubble.png";
+            bigbubble.src = "scarecrow/bigbubble.png";
+            ole_scarecrow.src = "scarecrow/scarecrow.png";
+            var can = document.getElementById('cloudvas').getContext('2d');
+            can.drawImage(ole_scarecrow, 0, 0);
+            window.setInterval(function() { draw(); }, 1000);
+        }
+        
+        function draw() { 
+            var can = document.getElementById('cloudvas').getContext('2d');
+            can.drawImage(ole_scarecrow, 0, 0);
+            if (bubb_count == 1) {
+                can.drawImage(bubble1, 300, 150);
+            }
+        }
+    </script>
+</head>
+<body onLoad=init()>
+    <span><canvas id="cloudvas" height="1000" width="1000"; style="image-rendering: pixelated; display: inline-block;"></canvas></span>
+</body>
+</html>
