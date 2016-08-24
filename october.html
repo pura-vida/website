@@ -9,24 +9,60 @@
         var bigbubble = new Image();
         var ole_scarecrow = new Image();
         var scarecrow_position;
-        var bubb_count = 1;
+        var bubb_count = 0;
+        var canvas;
 
         function init() {
+            var can = document.getElementById('cloudvas').getContext('2d');
+            canvas = document.getElementById('cloudvas');
             bubble1.src = "scarecrow/bubble.png";
             bubble2.src = "scarecrow/bubble.png";
             bubble3.src = "scarecrow/bubble.png";
             bigbubble.src = "scarecrow/bigbubble.png";
             ole_scarecrow.src = "scarecrow/scarecrow.png";
-            var can = document.getElementById('cloudvas').getContext('2d');
             can.drawImage(ole_scarecrow, 0, 0);
-            window.setInterval(function() { draw(); }, 1000);
+            canvas.addEventListener("mousedown", 
+                function (e) {
+                    checkxy(e)
+                }, false);    
+            window.setInterval(function() { draw(); }, 800);
+       }
+        
+        function checkxy(e) {
+            var click_x = e.clientX - canvas.offsetLeft;
+            var click_y = e.clientY - canvas.offsetTop;
+            if (click_x >= 400 && click_x <= 600 
+                    && click_y >= 105 && click_y <= 305) {
+                 window.open("http://www.clickhole.com/quiz/will-it-be-october-3172");
+            }
         }
         
         function draw() { 
             var can = document.getElementById('cloudvas').getContext('2d');
             can.drawImage(ole_scarecrow, 0, 0);
-            if (bubb_count == 1) {
-                can.drawImage(bubble1, 300, 150);
+            if (bubb_count == 0) {
+                bubb_count++;
+            } else if (bubb_count == 1) {
+                can.drawImage(bubble1, 325, 150);
+                bubb_count++;
+            } else if (bubb_count == 2) {
+                can.drawImage(bubble1, 325, 150);
+                can.drawImage(bubble2, 350, 125);
+                bubb_count++;
+            } else if (bubb_count == 3) {
+                can.drawImage(bubble1, 325, 150);
+                can.drawImage(bubble2, 350, 125);
+                can.drawImage(bubble3, 385, 110);
+                bubb_count++;
+            } else if (bubb_count < 15) {
+                can.drawImage(bubble1, 325, 150);
+                can.drawImage(bubble2, 350, 125);
+                can.drawImage(bubble3, 385, 110);
+                can.drawImage(bigbubble, 400, 105);
+                bubb_count++;    
+            } else {
+                can.clearRect(400, 105, 800, 400);
+                bubb_count = 1;
             }
         }
     </script>
