@@ -3,7 +3,7 @@ var map_dialog = undefined;
 var map_dimmer = undefined;
 
 //TODO (from cookies)
-var places = ["", "fighter.html", "cow.html", "snail.html", "dogclick.html",];
+var places = ["", "october.html", "fighter.html", "cow.html", "snail.html", "dogclick.html",];
 
 function createMapButton(){
 	deleteMapDoms();
