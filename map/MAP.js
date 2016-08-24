@@ -2,8 +2,12 @@ var map_button = undefined;
 var map_dialog = undefined;
 var map_dimmer = undefined;
 
-//TODO (from cookies)
+// *****************************************************************************************************
+// ****NOTE::: If you add a url here, make sure you add it to the "pages" array in frame.html!!!!*******
+// *****************************************************************************************************
 var places = ["", "october.html", "fighter.html", "cow.html", "snail.html", "dogclick.html",];
+
+//TODO (from cookies)
 
 function createMapButton(){
 	deleteMapDoms();

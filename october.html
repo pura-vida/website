@@ -25,8 +25,22 @@
                 function (e) {
                     checkxy(e)
                 }, false);    
+            canvas.addEventListener("mousemove",
+                function(e){
+                    checkxy_mousemove(e)
+                }, false);
             window.setInterval(function() { draw(); }, 800);
        }
+        
+        function checkxy_mousemove(e){
+            canvas.style.cursor = "";
+            var click_x = e.clientX - canvas.offsetLeft;
+            var click_y = e.clientY - canvas.offsetTop;
+            if (click_x >= 400 && click_x <= 600 
+                    && click_y >= 105 && click_y <= 305) {
+                canvas.style.cursor = "pointer";
+            }
+        }
         
         function checkxy(e) {
             var click_x = e.clientX - canvas.offsetLeft;
