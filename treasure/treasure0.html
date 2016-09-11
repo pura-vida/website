@@ -1,0 +1,25 @@
+<html>
+<body>
+<center style="text-align: vertical;"> 
+	<center>
+		<img id="diamond" src="treasure/diamond1.png">
+		<br/>
+		you won the diamond!
+	</center>
+</center>
+<script type="text/javascript">
+var on_diamond1 = true;
+window.setInterval(function() {
+	var diamond = document.getElementById("diamond");
+	if (on_diamond1) {
+		diamond.src = "diamond2.png";
+	} else {
+		diamond.src = "diamond1.png";
+	}
+	on_diamond1 = !on_diamond1;
+}, 300);
+
+window.localStorage.setItem("has_diamond", true);
+</script>
+</body>
+</html>

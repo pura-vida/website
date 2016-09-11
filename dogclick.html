@@ -21,6 +21,12 @@
 		top: 0px;
 		left: 0px;
 	}
+	.treasureLink {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		font-size: 36px;
+	}
 </style>
 </head>
 <body style="margin:0;padding:0;">
@@ -31,12 +37,12 @@
 </div>
 <span style="font-size: 200%;">instructions: click the dog</span>
 <div id="dogclickdiv" onmousedown="dogclick();">
-	<img src="dogclick/dog1.png" id="dog1" style="display:none;" onload="load()" onmousedown="dogclick();">
-	<img src="dogclick/dog2.png" id="dog2" style="display:none;" onload="load()" onmousedown="dogclick();">
-	<img src="dogclick/dog3.png" id="dog3" style="display:none;" onload="load()" onmousedown="dogclick();">
-	<img src="dogclick/dog4.png" id="dog4" style="display:none;" onload="load()" onmousedown="dogclick();">
-	<img src="dogclick/dog5.png" id="dog5" style="display:none;" onload="load()" onmousedown="dogclick();">
-	<img src="dogclick/dog6.png" id="dog6" style="display:none;" onload="load()" onmousedown="dogclick();">
+	<img src="dogclick/dog1.png" id="dog1" style="display:none;">
+	<img src="dogclick/dog2.png" id="dog2" style="display:none;">
+	<img src="dogclick/dog3.png" id="dog3" style="display:none;">
+	<img src="dogclick/dog4.png" id="dog4" style="display:none;">
+	<img src="dogclick/dog5.png" id="dog5" style="display:none;">
+	<img src="dogclick/dog6.png" id="dog6" style="display:none;">
 </div>
 <script>
 var div = document.getElementById("dogclickdiv");
@@ -55,12 +61,25 @@ var win = false;
 
 var num_loaded = 0;
 var num_needed = 6;
+
 function load(){
 	num_loaded++;
 	if (num_loaded >= num_needed){
 		main();
 	}
 }
+
+function init(){
+	for (var i = 0; i < num_needed; i++){
+		var img = document.createElement("img");
+		img.id = "dog"+(i+1);
+		img.style.display = "none";
+		img.src = "dogclick/dog"+(i+1)+".png";
+		img.onload = load;
+		img.onmousedown = dogclick;
+	}
+}
+window.onload = init;
 
 var colors = [
 	"#F36B72",
@@ -130,6 +149,12 @@ function dogclick(){
 		if (color_index >= colors.length){
 			color_index = 0;
 			win = true;
+			
+			var link = document.createElement("a");
+			link.href = "treasure/treasure0.html";
+			link.className = "treasureLink";
+			link.innerHTML = "click here to claim your reward!";
+			document.body.appendChild(link);
 		}
 		color = colors[color_index];
 		next_color += 3;
