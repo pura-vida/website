@@ -11,10 +11,14 @@
     width = w.innerWidth || e.clientWidth || g.clientWidth,
     height = w.innerHeight|| e.clientHeight|| g.clientHeight;
     var star = new Image();
-
+    var jakey = new Image();
+    
     function init() {
+        var can = document.getElementById('canvas').getContext('2d');
         window.setInterval(function() { draw(); }, 100);
         star.src = "oldjakey/star.png";
+        star.src = "oldjakey/oldjakey.png";
+        can.drawImage(jakey, 0, 0);
     }
 
     function draw() {
@@ -26,8 +30,5 @@
 </script>
 <body bgcolor="#003399" onLoad=init()>
     <canvas id="canvas" style="width: 100%; height: 100%; display: inline-block"></canvas>
-    <center>
-        <img src="oldjakey/oldjakey.png">
-    </center>
 </body>
 </html>

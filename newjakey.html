@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>cutebug</title>
+<script>
+    //http://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
+    var jakey = [
+        "newjakey/jakey2.jpg", 
+        "newjakey/jakey2.jpg",  
+        "newjakey/jakey3.jpg",                     
+        "newjakey/jakey4.jpg",
+        "newjakey/jakey5.jpg",
+        "newjakey/jakey6.jpg",
+        "newjakey/jakey5.jpg",
+        "newjakey/jakey4.jpg",
+        "newjakey/jakey3.jpg",
+        "newjakey/jakey2.jpg",
+        "newjakey/jakey2.jpg" 
+    ];             
+    var count = 0; 
+
+    function init() {
+        window.setInterval(function() { justjakin(); }, 50);
+    }
+
+    function justjakin() {
+        if (count == jakey.length) {
+            count = 0;
+        }
+        var str1 =  "<img id=\"jake\" style=\"width: 1000px;\" src=\"";
+        var str2 = jakey[count];
+        var str3 = "\"></img>";
+        var html_string = str1 + str2 + str3; 
+        console.log(html_string);
+        document.getElementById('jake').src = jakey[count];
+        count += 1;
+    }
+</script>
+<body onLoad=init()>
+<img id="jake" style="width: 1000px;" src=""></img>
+</body>
+</html>
